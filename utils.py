@@ -113,17 +113,6 @@ QUESTIONS = [
         ],
     },
     {
-        "key": "q6",
-        "title": "Q6. 미로의 장기화 (지구력/최대 시간)",
-        "caption": "생각보다 적들이 질기고, 미로가 복잡해서 모험의 결말이 늦어지고 있습니다. 이때의 당신은?",
-        "options": [
-            ("빨리 여관으로 돌아가 쉬고 싶어 안달이 난다.", 1),
-            ("조금 지치지만 1시간 정도 더 가는 건 버틸 수 있다.", 2),
-            ("오히려 좋아. 깊어진 여정은 내 인내심을 깎지 못한다.", 3),
-            ("시간의 흐름조차 잊었다! 끝을 볼 때까지 완전 몰입 상태.", 4),
-        ],
-    },
-    {
         "key": "q7",
         "title": "Q7. 여정의 전설 (기억에 남는 승리 방식)",
         "caption": "모든 여정이 끝난 후 10년 뒤, 오늘을 회상한다면 어떤 장면이 가장 빛날까요?",
@@ -149,7 +138,7 @@ QUESTIONS = [
 
 TYPE_PRIORITY = {"strategy": 4, "coop": 3, "theme": 2, "party": 1}
 TYPE_QUESTION_KEYS = ("q1", "q5", "q7", "q8")
-RECOMMENDATION_QUESTION_KEYS = ("q2", "q3", "q4", "q6")
+RECOMMENDATION_QUESTION_KEYS = ("q2", "q3", "q4")
 DISPLAY_QUESTION_ORDER = TYPE_QUESTION_KEYS + RECOMMENDATION_QUESTION_KEYS
 
 
@@ -981,12 +970,10 @@ def resolve_type(answers: dict[str, object], scores: dict[str, int]) -> str:
 
 def build_profile(answers: dict[str, object]) -> dict[str, int]:
     q3_time = int(answers["q3"])
-    q6_time = int(answers["q6"])
     return {
         "players_preference": int(answers["q2"]),
         "q3_time": q3_time,
-        "q6_time": q6_time,
-        "time_preference": max(1, min(4, round((q3_time + q6_time) / 2))),
+        "time_preference": q3_time,
         "complexity_preference": int(answers["q4"]),
     }
 
@@ -1090,7 +1077,7 @@ def get_option_contribution_label(q_key: str, value: str | int) -> str:
         if value == 5: return "👥 인원 필터: 5인 이상"
         return "👥 인원 필터: 전체 (제한 없음)"
     
-    if q_key in ("q3", "q6"):
+    if q_key == "q3":
         if value == 1: return "⏱️ 시간 선호: 입문(30분 내)"
         if value == 2: return "⏱️ 시간 선호: 보통(60분 내)"
         if value == 3: return "⏱️ 시간 선호: 숙련(120분 내)"

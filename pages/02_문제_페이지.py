@@ -183,7 +183,7 @@ def render_result() -> None:
             """
             <div style="background:#fdfcfb; padding:1.2rem 1.25rem; border-radius:12px; border:1px solid #eee; margin-bottom:1rem;">
                 <p style="margin:0; font-size:1.18rem; font-weight:800; color:#4b3a2d;">
-                    유형별 성향 진단(1~4번) + 보드게임 top3 제시(5~8번)
+                    유형별 성향 진단(1~4번) + 보드게임 top3 제시(5~7번)
                 </p>
             </div>
             """,
